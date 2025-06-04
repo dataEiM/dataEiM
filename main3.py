@@ -85,10 +85,18 @@ def on_row_selected(sender, app_data, user_data):
 
     print("cell_value=",cell_value)
     print("cell_label=",cell_label)
-          
+    def show_window():
+        x, y = dpg.get_item_rect_min(tmp_row_col)
+        
+        dpg.delete_item("New_Window_popup") if dpg.does_item_exist("New_Window_popup") else None
+        with dpg.window(label="New_Window_popup", tag="New_Window_popup", pos=(x, y)):
+            dpg.add_input_text(label="Input Text")
+            dpg.add_input_int(label="Input Integer")
 
-  
     
+
+    show_window()
+
 def load_csv_callback():
     try:
         with open(file_path, newline='', encoding='utf-8') as csvfile:
@@ -105,7 +113,7 @@ def load_csv_callback():
         #print(row)
 
     # คำนวณจำนวนคอลัมน์มากที่สุด
-        max_cols = max(len(row) for row in data)+2
+        max_cols = max(len(row) for row in data)+1
 
     # สร้าง header ถ้ายังไม่มี
     for i in range(max_cols):
