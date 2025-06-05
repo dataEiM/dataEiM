@@ -55,10 +55,10 @@ def save_table_to_file():
 
 def fnc_setValue():
     pass    
-    tmp_new_data=dpg.get_value("popup_input_field")
-
+    #tmp_new_data=dpg.get_value("popup_input_field")
+    tmp_new_data=dpg.get_value("input_popup1")
     global temp_slect_data
-    tmp_row_col="row_"+str(temp_slect_data[0])+"_4"
+    tmp_row_col="row_"+str(temp_slect_data[0])+"_5"
     print("after click ok ",tmp_new_data,tmp_row_col)
  
     #print("xxxxxxx=",tmp_row_col)
@@ -87,13 +87,15 @@ def on_row_selected(sender, app_data, user_data):
     print("cell_label=",cell_label)
     def show_window():
         x, y = dpg.get_item_rect_min(tmp_row_col)
-        
+
         dpg.delete_item("New_Window_popup") if dpg.does_item_exist("New_Window_popup") else None
         with dpg.window(label="New_Window_popup", tag="New_Window_popup", pos=(x, y)):
-            dpg.add_input_text(label="Input Text")
-            dpg.add_input_int(label="Input Integer")
-
-    
+            with dpg.group(horizontal=False,tag="container_New_Window_popup"):
+                pass
+                 #create new window for input data to table      
+                dpg.add_input_text(label="Input Text", tag="input_popup1")
+                  
+                dpg.add_button(label="Set", callback=fnc_setValue)
 
     show_window()
 
@@ -113,7 +115,7 @@ def load_csv_callback():
         #print(row)
 
     # คำนวณจำนวนคอลัมน์มากที่สุด
-        max_cols = max(len(row) for row in data)+1
+        max_cols = max(len(row) for row in data)+2
 
     # สร้าง header ถ้ายังไม่มี
     for i in range(max_cols):
@@ -169,7 +171,8 @@ with dpg.theme() as table_theme:
 with dpg.window(label="CSV Table Window", width=850, height=590):
     dpg.add_button(label="Load CSV", callback=load_csv_callback)
     with dpg.table(header_row=True, resizable=True, borders_innerH=True, borders_outerH=True,
-                   borders_innerV=True, borders_outerV=True, policy=dpg.mvTable_SizingStretchProp, tag="csv_table", callback=on_row_selected) as selectablecells:
+                   borders_innerV=True, borders_outerV=True, policy=dpg.mvTable_SizingStretchProp, tag="csv_table", 
+                   callback=on_row_selected) as selectablecells:
         pass
     
     ###########
