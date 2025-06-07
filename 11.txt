@@ -1,0 +1,171 @@
+1,Do a visual check to make sure there are no observable assembly problem. refer to Schematic 0378290-000_AC.pdf and incorporated Wirelist if needed.,,PASS/FAIL
+1.1,The AC PDU show have already been check the wiring continuity. Complte this check of no alerady done.Refer to Schematic 0378290-000_AC.pdf and incorporated Wirelist if needed.,,PASS/FAIL
+1.2,Attach the Power Cord from AC PDU rear panel position J1 to an appropriate receptacle. The voltage source must be 208Vac. 3-Phase W/Neutral and Ground(5-wire wye configuration).,,208 Vac.
+2.1,"Measure  TB1‐1A to TB1‐4A (expecting infinity ""OL"").",,Ohm
+2.2,"Measure TB1‐7A to TB1‐10A (expecting infinity ""OL"").",,Ohm
+2.3,"Measure TB2‐1A to  PS1 (+). (expecting infinity ""OL"").",,Ohm
+3.1,"Measure  TB1‐1A to TB1‐4A (expecting infinity ""OL"").",,Ohm
+3.2,"Measure TB1‐7A to TB1‐10A (expecting infinity ""OL"").",,Ohm
+3.3,"Measure TB2‐1A to  PS1 (+). (expecting infinity ""OL"").",,Ohm
+7.1,CB1:OFF. Visual check the power ON light on the fron panel status.,,OFF
+7.2,CB1:OFF. Visual check the Green LED on PS1 power suppy status.,,OFF
+7.3,CB1:ON. Visual check the power ON light on the fron panel status.,,OFF
+7.4,CB1:ON. Visual check the Green LED on PS1 power suppy status.,,ON
+8.1,SYSTEM STATUS,,ON
+8.2,Visual check EMO RELAY LED.,,ON GREEN
+8.3,Visual check K1 Relay LED.,,ON GREEN
+8.4,Visual check LOCAL LED.,,ON GREEN
+8.5,Visual check POWER ON LED.,,ON GREEN
+9.1,SYSTEM STATUS,,OFF
+9.2,Visual check EMO RELAY LED.,,OFF
+9.3,Visual check K1 Relay LED.,,OFF
+9.4,Visual check LOCAL LED.,,OFF
+9.5,Visual check POWER ON LED.,,OFF
+10.1,SYSTEM STATUS,,ON
+10.2,Visual check Power On light LED.,,ON GREEN
+10.3,Visual check The front panel “Local” LED,,ON GREEN
+11.1,SYSTEM STATUS,,OFF
+11.2,Visual check Power On light LED.,,OFF
+11.3,Visual check The front panel “Local” LED,,OFF
+12.1, The Green LED on the PS2 power supply should come on.,,ON GREEN
+12.2, The fan at the rear panel of the AC PDU should be running.,,RUNNING
+12.3, The PLC Run/Stop and Maint lights should flash for 10 secs and ,,FLASHING
+12.4,Just the Run/Stop should flash.,,FLASHING
+13.1,"The RUN/STOP, ERROR and MAINT will flash for about 30 sec. ",,FLASHING
+13.2,Wait until only the MAINT light flashes.,,FLASHING
+15.1.2,Visual check EMO RELAY LED.,,ON GREEN
+15.1.3,Visual check K1 Relay LED.,,ON GREEN
+15.1.4,Visual check LOCAL LED.,,ON GREEN
+15.1.5,Visual check POWER ON LED.,,ON GREEN
+15.2.1,SYSTEM STATUS,,OFF
+15.2.2,Visual check EMO RELAY LED.,,OFF
+15.2.3,Visual check K1 Relay LED.,,OFF
+15.2.4,Visual check LOCAL LED.,,OFF
+15.2.5,Visual check POWER ON LED.,,OFF
+15.3.1,SYSTEM STATUS,,ON
+15.3.2,Visual check Power On light LED.,,ON GREEN
+15.3.3,Visual check The front panel “Local” LED,,ON GREEN
+15.4,set DI‐1 to the rear position (ON) ,,DO-7 ON GREEN
+15.5,setDI‐1 to the front position (OFF) ,,DO-7 OFF
+15.6,setDI‐2 to the rear position (ON)  ,,DO-8 ON GREEN
+15.7,set DI‐2 to the front position (OFF)  ,,DO-8 OFF
+15.8,set DI‐3 to the rear position (ON)  ,,DO-9 ON GREEN
+15.9,set DI‐3 to the front position (OFF)  ,,DO-9 OFF
+15.10,set DI‐4 to the rear position (ON)  ,,DO-10 ON GREEN
+15.11,set DI‐4 to the front position (OFF) ,,DO-10 OFF
+15.12,set DI‐5 to the rear position (ON) ,,DO-11 ON GREEN
+15.13,set DI‐5 to the front position (OFF) ,,DO-11 OFF
+15.14,set DI‐6 to the rear position (ON) ,,DO-12 ON GREEN
+15.15,set DI‐6 to the front position (OFF) ,,DO-12 OFF
+15.16,set DI‐7 to the rear position (ON) ,,DO-13 ON GREEN
+15.17,set DI‐7 to the front position (OFF) ,,DO-13 OFF
+15.18,set DI‐8 to the rear position (ON) ,,DO-14 ON GREEN
+15.19,set DI‐8 to the front position (OFF) ,,DO-14 OFF
+15.20,set DI‐11 to the rear position (ON) ,,DO-15 ON GREEN
+15.21,set DI‐11 to the front position (OFF) ,,DO-15 OFF
+15.22,set DI‐12 to the rear position (ON),,DO-16 ON GREEN
+15.23,set DI‐12 to the front position (OFF) ,,DO-16 OFF
+15.24,set DI‐13 to the rear position (ON) ,,DO-17 ON GREEN
+15.25,set DI‐13 to the front position (OFF) ,,DO-17 OFF
+15.26,set DI‐14 to the rear position (ON),,DO-18 ON GREEN
+15.27,set DI‐14 to the front position (OFF) ,,DO-18 OFF
+15.28,set DI‐15 to the rear position (ON) ,,DO-19 ON GREEN
+15.29,set DI‐15 to the front position (OFF) ,,DO-19 OFF
+15.30,set DI‐16 to the rear position (ON),,DO-20 ON GREEN
+15.31,set DI‐16 to the front position (OFF),,DO-20 OFF
+15.32,set DI‐17 to the rear position (ON),,DO-21 ON GREEN
+15.33,set DI‐17 to the front position (OFF),,DO-21 OFF
+15.34,set DI‐18 to the rear position (ON) ,,DO-22 ON GREEN
+15.35,set DI‐18 to the front position (OFF),,DO-22 OFF
+15.36,Press the front panel “Sub‐System Start” ,,DO-7 ON GREEN
+15.37,Release the front panel “Sub‐System Start”,,DO-7 OFF
+15.38,Press the front panel “Sub‐System STOP” ,,DO-8 ON GREEN
+15.39,Release the front panel “Sub‐System STOP”,,DO-8 OFF
+15.40,Starting with switch DI‐1 to DI-18; turn  on . Verify that the LED next to each switch is on when the switch is on   then turn switches DI‐1 through DI‐18  off ,,PASS/FAIL
+15.41,Set the Daughter Board “SERV MODE” switch on. The LED DO‐21 should flash once every 2 seconds. Leave the switch on.,,PASS/FAIL
+15.42,Set the Daughter Board “STAGE OVERD” switch on. The LED DO‐21 should flash twice every 2 seconds. Leave the switch on.,,PASS/FAIL
+15.43,Set the Daughter Board “DC PWR STAT” switch on. The LED DO‐21 should flash 3 times every 2 seconds and the “MTR RELAY” LED should come on.,,PASS/FAIL
+16.1.1,"With a DVM, check the voltage between X and Y (expecting 200‐240Vac..).",,Vac.
+16.1.2,"With a DVM, check the voltage between Y and Z (expecting 200‐240Vac..).",,Vac.
+16.1.3,"With a DVM, check the voltage between X and Z (expecting 200‐240Vac..).",,Vac.
+16.1.4,"With a DVM, check the voltage between X and N at the connector (expecting 108‐125Vac..).",,Vac.
+16.1.5,"With a DVM, check the voltage between X and G at the connector (expecting 108‐125Vac..).",,Vac.
+16.2,Turn CB6:OFF and set DI‐1 to the off position.,,
+16.2.1,"With a DVM, check the voltage between X and Y (expecting 0 Vac.)",,Vac.
+16.2.2,"With a DVM, check the voltage between Y and Z (expecting 0 Vac..).",,Vac.
+16.2.3,"With a DVM, check the voltage between X and Z (expecting 0Vac..).",,Vac.
+16.2.4,"With a DVM, check the voltage between X and N at the connector (expecting 0 Vac..).",,Vac.
+16.2.5,"With a DVM, check the voltage between X and G at the connector (expecting  0 Vac..).",,Vac.
+16.3.1,"With a DVM, check the AC Voltage at J10. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.3.2,"With a DVM, check the AC Voltage at J10. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.3.3,"With a DVM, check the AC Voltage at J11. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.3.4,"With a DVM, check the AC Voltage at J11. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.3.5,"With a DVM, check the AC Voltage at J12. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.3.6,"With a DVM, check the AC Voltage at J12. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.4.1,"With a DVM, check the AC Voltage at J10. The  voltage between the L and N pins (expecting 0 Vac..).",,Vac.
+16.4.2,"With a DVM, check the AC Voltage at J10. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.4.3,"With a DVM, check the AC Voltage at J11. The  voltage between the L and N pins (expecting  0 Vac..).",,Vac.
+16.4.4,"With a DVM, check the AC Voltage at J11. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.4.5,"With a DVM, check the AC Voltage at J12. The  voltage between the L and N pins (expecting  0 Vac..).",,Vac.
+16.4.6,"With a DVM, check the AC Voltage at J12. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.5.1,"With a DVM, check the AC Voltage at J4. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.5.2,"With a DVM, check the AC Voltage at J4. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.5.3,"With a DVM, check the AC Voltage at J5. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.5.4,"With a DVM, check the AC Voltage at J5. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.5.5,"With a DVM, check the AC Voltage at J6. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.5.6,"With a DVM, check the AC Voltage at J6. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.6.1,"With a DVM, check the AC Voltage at J4. The  voltage between the L and N pins (expecting 0 Vac..).",,Vac.
+16.6.2,"With a DVM, check the AC Voltage at J4. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.6.3,"With a DVM, check the AC Voltage at J5. The  voltage between the L and N pins (expecting  0 Vac..).",,Vac.
+16.6.4,"With a DVM, check the AC Voltage at J5. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.6.5,"With a DVM, check the AC Voltage at J6. The  voltage between the L and N pins (expecting  0 Vac..).",,Vac.
+16.6.6,"With a DVM, check the AC Voltage at J6. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.7.1,"With a DVM, check the AC Voltage at J7. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.7.2,"With a DVM, check the AC Voltage at J7. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.7.3,"With a DVM, check the AC Voltage at J8 The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.7.4,"With a DVM, check the AC Voltage at J8. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.7.5,"With a DVM, check the AC Voltage at J9. The  voltage between the L and N pins (expecting 208‐230Vac..).",,Vac.
+16.7.6,"With a DVM, check the AC Voltage at J9. the voltage between the L and G pins  (expecting 108‐125Vac..).",,Vac.
+16.8.1,"With a DVM, check the AC Voltage at J7. The  voltage between the L and N pins (expecting 0 Vac..).",,Vac.
+16.8.2,"With a DVM, check the AC Voltage at J7. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.8.3,"With a DVM, check the AC Voltage at J8. The  voltage between the L and N pins (expecting  0 Vac..).",,Vac.
+16.8.4,"With a DVM, check the AC Voltage at J8. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+16.8.5,"With a DVM, check the AC Voltage at J9. The  voltage between the L and N pins (expecting  0 Vac..).",,Vac.
+16.8.6,"With a DVM, check the AC Voltage at J9. the voltage between the L and G pins  (expecting  0 Vac..).",,Vac.
+17.1.1,"With a DVM, check the voltage between X and Y (expecting 200‐240Vac..).",,Vac.
+17.1.2,"With a DVM, check the voltage between Y and Z (expecting 200‐240Vac..).",,Vac.
+17.1.3,"With a DVM, check the voltage between X and Z (expecting 200‐240Vac..).",,Vac.
+17.1.4,"With a DVM, check the voltage between X and N at the connector (expecting 108‐125Vac..).",,Vac.
+17.1.5,"With a DVM, check the voltage between X and G at the connector (expecting 108‐125Vac..).",,Vac.
+17.2.1,"With a DVM, check the voltage between X and Y (expecting 0 Vac.)",,Vac.
+17.2.2,"With a DVM, check the voltage between Y and Z (expecting 0 Vac..).",,Vac.
+17.2.3,"With a DVM, check the voltage between X and Z (expecting 0Vac..).",,Vac.
+17.2.4,"With a DVM, check the voltage between X and N at the connector (expecting 0 Vac..).",,Vac.
+17.2.5,"With a DVM, check the voltage between X and G at the connector (expecting  0 Vac..).",,Vac.
+20,"Verify that the dials on K12 (the large green relay near the front of the PDU) are set properly.
+ Max = 40, Min = 20 and Delay = 0.",,ADJ DONE
+22,Press the front panel “System Start” button to turn on the AC PDU and verify that the DO-8 LED (24VDC power) on the test fixture and the U LED on K12 are on. Verify DO-13 is off.,,PASS/FAIL
+23,Switch on DI-3 and the front panel LED “Cluster” and the DO-13 LED should be on.,,PASS/FAIL
+24,Switch off DI-3 and the PDU should shutdown. Switch DI-3 on again and the PDU should come back on with the “Cluster” LED on.,,PASS/FAIL
+25.1,Test Fixture Verify LED's DO-9.,,ON GREEN
+25.2,Test Fixture Verify LED's DO-10,,ON GREEN
+25.3,Test Fixture Verify LED's DO-11,,ON GREEN
+25.4,The Unit verify LED at K12 coil.,,ON GREEN
+26.1,Test Fixture Verify LED's DO-12,,ON GREEN
+26.2,The Unit verify LED at K12 coil.,,ON GREEN
+27.1,Test Fixture Verify LED's DO-9.,,OFF
+27.2,Test Fixture Verify LED's DO-10,,OFF
+27.3,Test Fixture Verify LED's DO-11,,OFF
+27.4,Test Fixture Verify LED's DO-12,,OFF
+28.1,Test Fixture Verify LED's DO-14,,ON GREEN
+31,Turn on CB1 and CB2 and verify that the PLC CPU and Module RUN/STOP lights are green after 30 seconds.,,PASS/FAIL
+32,Set all fixture Motherboard switches toward the front (off position). Set all Daughter Board switches in the full down position (off position). Ensure all other front panel circuit breakers OFF. (Except CB1 and CB2).,,DONE
+33,"With a DVM, check the AC voltage at J4 from rear panel of unit. Turn ON CB3, the voltage between the L and N pins should be 208Vac.. Turn OFF CB3 after check.",,Vac
+34,"With a DVM, check the AC voltage at J7 from rear panel of unit. Turn ON CB4, the voltage between the L and N pins should be 208Vac.. Turn OFF CB4 after check.",,Vac
+35,"With a DVM, check the AC voltage at J10 from rear panel of unit. Turn ON CB7, the voltage between the L and N pins should be 208Vac.. Turn OFF CB7 after check",,Vac
+,5Vdc,,Vdc
+,5Vdc,,Vdc
+,12Vdc,,Vdc
+,24Vdc,,Vdc
+,24Vdc,,Vdc
+37,Turn off all circuit breakers on the front panel of the AC PDU.,,DONE
