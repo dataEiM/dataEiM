@@ -190,13 +190,17 @@ with dpg.theme() as table_theme:
 
 with dpg.window(label="CSV Table Window", width=850, height=800):
     dpg.add_button(label="Load CSV", callback=load_csv_callback)
+        # กราฟแสดงผล
+    dpg.add_text("Test Progress")
+    dpg.add_progress_bar(default_value=0.75, width=-1)
     with dpg.table(header_row=True, resizable=True, borders_innerH=True, borders_outerH=True,
                    borders_innerV=True, borders_outerV=True, policy=dpg.mvTable_SizingStretchProp, tag="csv_table", 
-                   callback=on_row_selected) as selectablecells:
+                   callback=on_row_selected,) as selectablecells:
         pass
     
     ###########
 
+    
 
     dpg.add_button(label="Show Table Data", callback=get_all_table_data)
     dpg.add_button(label="Save Table", callback=save_table_to_file)

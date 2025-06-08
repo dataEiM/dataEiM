@@ -149,18 +149,32 @@ def load_csv_callback():
                 tag_id="row_"+str(row_idx + 1)+"_"+str(cnt_cell)
 
                 dpg.add_selectable(label="" , callback=on_row_selected, user_data=tmp_data+[cnt_cell],tag=tag_id)     
+        dpg.bind_item_theme(selectablecells, table_theme)    
+            
               
 
 
 dpg.create_context()
 dpg.create_viewport(title="CSV Viewer (Dear PyGui)", width=900, height=600)
 
+with dpg.theme() as table_theme:
+    with dpg.theme_component(dpg.mvTable):
+        # dpg.add_theme_color(dpg.mvThemeCol_HeaderHovered, (255, 0, 0, 100), category=dpg.mvThemeCat_Core)
+        dpg.add_theme_color(dpg.mvThemeCol_HeaderActive, (0, 0, 0, 0), category=dpg.mvThemeCat_Core)
+        dpg.add_theme_color(dpg.mvThemeCol_Header, (0, 0, 0, 0), category=dpg.mvThemeCat_Core)
+        
+
+
+
 with dpg.window(label="CSV Table Window", width=850, height=590):
     dpg.add_button(label="Load CSV", callback=load_csv_callback)
     with dpg.table(header_row=True, resizable=True, borders_innerH=True, borders_outerH=True,
-                   borders_innerV=True, borders_outerV=True, policy=dpg.mvTable_SizingStretchProp, tag="csv_table", callback=on_row_selected):
+                   borders_innerV=True, borders_outerV=True, policy=dpg.mvTable_SizingStretchProp, tag="csv_table", callback=on_row_selected) as selectablecells:
         pass
+    
     ###########
+
+
     dpg.add_button(label="Show Table Data", callback=get_all_table_data)
     dpg.add_button(label="Save Table", callback=save_table_to_file)
     ###########
