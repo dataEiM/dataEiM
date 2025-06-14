@@ -74,13 +74,22 @@ def save_table_to_file():
 
 
 
-########################
+
 
 #def fun_next_row():
  #   print("next row")
  #   #on_row_selected, user_data=tmp_data+[cnt_cell],tag=tag_id)  
 
 
+
+########################
+#check data and will set PASS/FAIL word in the last column
+def chk_val_limit(lex_limit,lex_click_data):
+    #chk_val_limit(lex_limit=temp_slect_data[-2],lex_click_data=temp_slect_data)
+    print("********************************")
+    print(lex_limit,lex_click_data)
+    print("********************************")
+    
 
 def fnc_setValue():
     global _inputForm
@@ -129,6 +138,7 @@ def show_window():
             ##################################################################################################
 
 
+    
 
 
 def on_row_selected(sender, app_data, user_data):
@@ -149,13 +159,23 @@ def on_row_selected(sender, app_data, user_data):
     temp_slect_data=user_data   
     print("temp_slect_data=",  temp_slect_data)
     
+    #after click a row
+    #Row selected: [40, '15.2.1', 'SYSTEM STATUS', 'OFF', 'option', 3]
+    #temp_slect_data= [40, '15.2.1', 'SYSTEM STATUS', 'OFF', 'option', 3]
+
     if len(user_data)>5:
+        #Row selected: [15, '8.2', 'Visual check EMO RELAY LED.', 'ON GREEN', 'option', 2]
         #print("select column",temp_slect_data[5])
         if(temp_slect_data[5]==3):
             print("select column 3")
+
+            #####################
             #copy from 3 to 5
-            tmp_row_col="row_"+str(temp_slect_data[0])+"_5"
-            dpg.set_item_label(tmp_row_col, temp_slect_data[-3])
+            #####################
+            tmp_row_col="row_"+str(temp_slect_data[0])+"_5"  #link to column 5 where i need to copy
+            dpg.set_item_label(tmp_row_col, temp_slect_data[-3]) #default value
+            ########################################################
+            
             _inputForm[temp_slect_data[0]]=1 #keep row number  key  for  check current add input to table form  \\\ only colum 3 \\\ add adding by set input box 
             print("current input ",_inputForm)
             dpg.set_value("input_form_text",sum(_inputForm.values()))   
@@ -168,7 +188,7 @@ def on_row_selected(sender, app_data, user_data):
             dpg.set_value("input_popup1",temp_slect_data[-3])
             dpg.focus_item("input_popup1")
 
-           
+            chk_val_limit(lex_limit=temp_slect_data[-2],lex_click_data=temp_slect_data)
 
         else:    
             print("temp_slect_data=",  temp_slect_data)
@@ -239,7 +259,7 @@ def load_csv_callback():
         #print(row)
 
     # คำนวณจำนวนคอลัมน์มากที่สุด
-        max_cols = max(len(row) for row in data)+2
+        max_cols = max(len(row) for row in data)+3
 
     # สร้าง header ถ้ายังไม่มี
     for i in range(max_cols):
