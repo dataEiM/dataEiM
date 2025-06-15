@@ -35,7 +35,14 @@ _current_list=0
 _inputForm={}
 _program_title=""
 #########################
+'''def set_msg(data):
+    old_msg=dpg.get_value("log_field")
+    data=data+"\n"+old_msg
+    dpg.set_value("log_field", data)
+'''
+ 
 def get_all_table_data():
+
     table_data = []
     try:
         # ดึงข้อมูลทุกแถวจากตาราง
@@ -74,7 +81,7 @@ def save_table_to_file():
 
 
 
-########################
+
 
 #def fun_next_row():
  #   print("next row")
@@ -82,11 +89,23 @@ def save_table_to_file():
 
 
 
+########################
+#check data and will set PASS/FAIL word in the last column
+def chk_val_limit(lex_limit,lex_click_data):
+    #call from on_row_selected
+        #chk_val_limit(lex_limit=temp_slect_data[-2],lex_click_data=temp_slect_data)
+
+    print("********************************")
+    print(lex_limit,"lex_click_data=",lex_click_data)
+    print("********************************")
+    
+
 def fnc_setValue():
+     
     global _inputForm
     global _max_list
     #tmp_new_data=dpg.get_value("popup_input_field")
-    tmp_new_data=dpg.get_value("input_popup1")
+    tmp_new_data=dpg.get_value("popUpWindow_input_text")
     global temp_slect_data
     tmp_row_col="row_"+str(temp_slect_data[0])+"_5"
     print("after click ok ",tmp_new_data,tmp_row_col)
@@ -112,34 +131,40 @@ def fnc_setValue():
 
 
 
-def show_window():
+def show_popInput():
     global temp_slect_data
     tmp_row_col="row_"+str(temp_slect_data[0])+"_5"
     x, y = dpg.get_item_rect_min(tmp_row_col)
 
     dpg.delete_item("New_Window_popup") if dpg.does_item_exist("New_Window_popup") else None
     with dpg.window(label="Enter Value", tag="New_Window_popup", pos=(x, y+21)):
-        with dpg.group(horizontal=False,tag="container_New_Window_popup"):
+        with dpg.group(horizontal=False,tag="container_popup_Input_text"):
             
             ##################################################################################################
             #pop up input box for setting new value 
             #create new window for input data to table      
-            dpg.add_input_text(label="Input Text", tag="input_popup1",on_enter=True,callback=fnc_setValue)                  
-            dpg.add_button(label="Set", callback=fnc_setValue)
+            dpg.add_input_text(label="Input Text", tag="popUpWindow_input_text",on_enter=True,callback=fnc_setValue)                  
+            #dpg.add_text("")  # สร้างบรรทัดว่าง
+            dpg.add_spacing(count=2)  # เพิ่มระยะห่าง 5 pixels
+            with dpg.group(horizontal=True, tag="container_popup_New"):
+                pass
+            dpg.add_spacing(count=5)  # เพิ่มระยะห่าง 5 pixels
+            dpg.add_button(label="Set Value", callback=fnc_setValue,tag="Set Value")
             ##################################################################################################
 
 
+    
 
 
 def on_row_selected(sender, app_data, user_data):
     global _inputForm 
     global _max_list
-   
+    print("============================================")
     print("Row selected:", user_data)
     
     dpg.set_value("my_text", user_data)
 
-    #popup_input_field
+    #popup_input_field deatil windows  for input data
     dpg.set_value("popup_input_field", user_data[3])  
     global temp_slect_data
   
@@ -149,13 +174,17 @@ def on_row_selected(sender, app_data, user_data):
     temp_slect_data=user_data   
     print("temp_slect_data=",  temp_slect_data)
     
+    #after click a row
+    #Row selected: [40, '15.2.1', 'SYSTEM STATUS', 'OFF', 'option', 3]
+    #temp_slect_data= [40, '15.2.1', 'SYSTEM STATUS', 'OFF', 'option', 3]
+
     if len(user_data)>5:
+        #Row selected: [15, '8.2', 'Visual check EMO RELAY LED.', 'ON GREEN', 'option', 2]
         #print("select column",temp_slect_data[5])
         if(temp_slect_data[5]==3):
-            print("select column 3")
-            #copy from 3 to 5
-            tmp_row_col="row_"+str(temp_slect_data[0])+"_5"
-            dpg.set_item_label(tmp_row_col, temp_slect_data[-3])
+            print("select column 3") 
+            ########################################################
+            
             _inputForm[temp_slect_data[0]]=1 #keep row number  key  for  check current add input to table form  \\\ only colum 3 \\\ add adding by set input box 
             print("current input ",_inputForm)
             dpg.set_value("input_form_text",sum(_inputForm.values()))   
@@ -163,12 +192,75 @@ def on_row_selected(sender, app_data, user_data):
             #dpg.set_value("percent_text",sum(_inputForm.values())/_max_list*100)    
             percentx=f"{(sum(_inputForm.values())/_max_list*100):.2f}%"
             dpg.set_value("percent_text",percentx)
-            
-            show_window()
-            dpg.set_value("input_popup1",temp_slect_data[-3])
-            dpg.focus_item("input_popup1")
+            #####################
+            #show pop up input box
+            #####################            
+            show_popInput()
+            dpg.set_value("popUpWindow_input_text",temp_slect_data[-3])
+            dpg.focus_item("popUpWindow_input_text")
 
-           
+
+            #####################
+            #copy from 3 to 5 
+            #####################
+            #if  temp_slect_data[-3] has two value will split and make a new select 
+            tmp_row_col="row_"+str(temp_slect_data[0])+"_5"  #link to column 5 where i need to copy
+ 
+            
+            #####################
+            #create butn  if col4 has two data  with "|" this section is working
+            #####################
+            temp_split=temp_slect_data[-3].split("|")
+            if(len(temp_split)>1):
+                for x in temp_split:
+                    dpg.add_button(label=x,tag="input_"+x,  parent="container_popup_New")#add to popup window 
+                    # ย้ายปุ่ม input_btnx ให้อยู่เหนือปุ่ม Set
+                    #dpg.move_item("input_btnx", parent="container_popup_Input_text", before="Set Value")       
+                #dpg.set_item_label("popUpWindow_input_text", "temp_split[0]") #default value    
+                dpg.set_value("popUpWindow_input_text", temp_split[0])   #set input text by first list[0]
+
+
+            else:
+                #if value has only one word this loop will work
+                for x in temp_split:
+                    # เปลี่ยน ON เป็น OFF
+                    #button_value_change = "OFF" if "ON" in x else x
+                    # เปลี่ยน ON เป็น OFF โดยใช้ replace
+                    if "ON" in x:
+                        button_value = x.replace("ON", "OFF")
+                        dpg.add_button(label=x,tag="input_"+x,  parent="container_popup_New")#add default text to popup window 
+                        dpg.add_button(label=button_value,tag="input_"+button_value,  parent="container_popup_New")#add new text to popup window 
+                        button_label = dpg.get_item_label("input_"+x)  # อ่าน label ของปุ่ม
+                        dpg.set_item_label(tmp_row_col, button_label) #default value    
+
+                    elif "OFF" in x:
+                        button_value = x.replace("OFF", "ON")
+                        dpg.add_button(label=x,tag="input_"+x,  parent="container_popup_New")#add default text to popup window 
+                        dpg.add_button(label=button_value,tag="input_"+button_value,  parent="container_popup_New")#add new text to popup window 
+                        button_label = dpg.get_item_label("input_"+x)  # อ่าน label ของปุ่ม
+                        dpg.set_item_label(tmp_row_col, button_label) #default value    
+
+                    #opposite word autogen and add a new button
+                    #dpg.add_button(label=button_value_change,tag="input_"+button_value_change,  parent="container_popup_New")#add to popup window 
+                    # ย้ายปุ่ม input_btnx ให้อยู่เหนือปุ่ม Set
+                    #dpg.move_item("input_btnx", parent="container_popup_Input_text", before="Set Value")                     
+ 
+            print("55555555555555555555555555555555555555555555")
+            print("temp_slect_data[-2]=",temp_slect_data[-2])
+            print("lex_click_data=",temp_slect_data)
+            print("55555555555555555555555555555555555555555555")
+            #########################################################
+            chk_val_limit(lex_limit=temp_slect_data[-2],lex_click_data=temp_slect_data)
+            ##########################################################
+
+            ##################################################
+            #check data before show pass or  fail 
+            ##################################################
+            tmp_row_col_limit="row_"+str(temp_slect_data[0])+"_4"  #link to column 4
+            print("tmp_row_col_limit",tmp_row_col_limit)
+            tmp_row_col_limit_text=dpg.get_item_label(tmp_row_col_limit)    
+            print("tmp_row_col_limit_text",tmp_row_col_limit_text)
+
 
         else:    
             print("temp_slect_data=",  temp_slect_data)
@@ -183,8 +275,7 @@ def on_row_selected(sender, app_data, user_data):
             percentx=f"{(sum(_inputForm.values())/_max_list*100):.2f}%"
 
             dpg.set_value("percent_text",percentx) 
-            show_window()
-
+            show_popInput()
 
     #tag_id="row_"+str(row_idx + 1)+"_"+str(cnt_cell)
     #tmp_row_col="row_"+str(user_data[0])+"_"+str(user_data[4]) # dynamic cell
@@ -194,14 +285,9 @@ def on_row_selected(sender, app_data, user_data):
     cell_value = dpg.get_value(tmp_row_col)
     cell_label = dpg.get_item_label(tmp_row_col)
 
-
     print("cell_value=",cell_value)
     print("cell_label=",cell_label)
-    
-
-    
-
-
+        
 
 def load_csv_callback():
     try:
@@ -239,7 +325,7 @@ def load_csv_callback():
         #print(row)
 
     # คำนวณจำนวนคอลัมน์มากที่สุด
-        max_cols = max(len(row) for row in data)+2
+        max_cols = max(len(row) for row in data)+3
 
     # สร้าง header ถ้ายังไม่มี
     for i in range(max_cols):
@@ -253,18 +339,27 @@ def load_csv_callback():
             cnt_cell=0
             # Add row number first
            # dpg.add_selectable(label=str(row_idx + 1), callback=on_row_selected, user_data=[row_idx + 1]+row)
-            dpg.add_selectable(label=str(row_idx + 1))
+            #dpg.add_selectable(label=str(row_idx + 1))
+            dpg.add_text(str(row_idx + 1))
            # dpg.add_selectable(label="row_"+str(row_idx + 1)+"_"+str(cnt_cell))
            
            
-            for cell in row:
+            for cell in row:                 
                 cnt_cell=cnt_cell+1
-              #  print("xxxx",cell,len(row))
-              #  print()
+                #print("xxxx",cell,len(row))               
                 tmp_data = [row_idx + 1] + row  # Include row number in the data
-              #  dpg.add_selectable(label="row_"+str(row_idx + 1)+"_"+str(cnt_cell), callback=on_row_selected, user_data=tmp_data,tag="row_"+str(row_idx + 1)+"_"+str(cnt_cell))  
+                #  dpg.add_selectable(label="row_"+str(row_idx + 1)+"_"+str(cnt_cell), 
+                # callback=on_row_selected, user_data=tmp_data,tag="row_"+str(row_idx + 1)+"_"+str(cnt_cell))  
                 tag_id="row_"+str(row_idx + 1)+"_"+str(cnt_cell)
+                
+                #dpg.add_selectable(label=cell, callback=on_row_selected, user_data=tmp_data+[cnt_cell],tag=tag_id)
+
+                ######## only col 3 can click ########
+                #if cnt_cell==3:
                 dpg.add_selectable(label=cell, callback=on_row_selected, user_data=tmp_data+[cnt_cell],tag=tag_id)    
+ 
+                 
+
                # print("row_"+str(row_idx + 1)+"_"+str(cnt_cell))
                
               #  dpg.add_text(cell)
@@ -276,8 +371,7 @@ def load_csv_callback():
                 tag_id="row_"+str(row_idx + 1)+"_"+str(cnt_cell)
 
                 dpg.add_selectable(label="" , callback=on_row_selected, user_data=tmp_data+[cnt_cell],tag=tag_id)     
-        dpg.bind_item_theme(selectablecells, table_theme)    
-            
+             
               
 
 
@@ -289,11 +383,7 @@ dpg.create_context()
 _program_title="GLX:KTestListx01"
 dpg.create_viewport(title=_program_title, width=1200, height=600)
 
-with dpg.theme() as table_theme:
-    with dpg.theme_component(dpg.mvTable):
-        # dpg.add_theme_color(dpg.mvThemeCol_HeaderHovered, (255, 0, 0, 100), category=dpg.mvThemeCat_Core)
-        dpg.add_theme_color(dpg.mvThemeCol_HeaderActive, (0, 0, 0, 0), category=dpg.mvThemeCat_Core)
-        dpg.add_theme_color(dpg.mvThemeCol_Header, (0, 0, 0, 0), category=dpg.mvThemeCat_Core)
+ 
         
 
 ############################
@@ -322,9 +412,7 @@ with dpg.window(label="Test list", width=850, height=800):
 
 
 
-#with dpg.window(label="Result", width=20, height=20,pos=[800,20],tag="result_table"):
-#    dpg.add_input_text(label="Result", width=20, height=20,tag="result")
- #   dpg.add_text("Result")
+
 
 ### show data after click a table row 
 
@@ -333,7 +421,16 @@ with dpg.window(label="Test Details", show=True, id="right_click_menu", no_title
     dpg.add_text("Input Data", tag="input_form_text")
     dpg.add_input_text(tag="popup_input_field", hint="Gtext")
     #dpg.add_button(label="About", callback=fnc_setValue)
-     
+
+'''
+with dpg.window(label="Terminal",tag="Terminal",id="Terminal",pos=[900,300],width=480,height=200):
+    dpg.add_text("App loging")
+    with dpg.child_window(width=490,height=500):
+        # autoscroll is turned on by default as tracked = True
+        dpg.add_input_text(
+            tag="log_field", multiline=True, readonly=True, tracked=True, track_offset=1, width=-1, height=0)
+'''
+
 
 
 dpg.setup_dearpygui()
