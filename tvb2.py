@@ -10,12 +10,6 @@ _last_tempKB=set()
 _last_tempKB_DEL=set()
 _last_tempKB_ADD=set()
 
-previous_text = ""
-_small_key=list()
-_small_key_text=list()
-_set_key_fail=set()
-
-
 keyboard_layout_num_BIG=[
 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 92,
 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 90, 88, 
@@ -48,9 +42,8 @@ keyboard_layout = [
 ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/']
 '''
 
-def checkProcess():
-     global _set_key_fail,_last_tempKB,previous_text    
-  
+
+
 
 
 def chkInputlength(sender, app_data, user_data):
@@ -88,12 +81,26 @@ def click_kb_fail():
     global _set_key_fail
     
     for i in _set_key_fail:
-        ii=str(i)       
+        ii=str(i)
+       
         if dpg.does_item_exist("btn_"+ii):
             dpg.bind_item_theme("btn_"+ii,"set_fail_theme")
-            print(ii) 
+            print(ii)
 
 
+
+
+
+
+
+
+
+
+
+
+previous_text = ""
+_small_key=list()
+_small_key_text=list()
 
 def on_text_change(sender, app_data):
     global _last_tempKB,_last_tempKB_DEL        
@@ -122,7 +129,6 @@ def on_text_change(sender, app_data):
 
             
     previous_text = new_text
-     
     
 
 
@@ -194,7 +200,7 @@ def check_kb():
 
 
 
-
+_set_key_fail=set()
 def clickKey(sender, app_data, user_data):
     print(f"setkb->sender:{sender},app_data:{app_data},user_data:{user_data}")
     #set fail key 
@@ -328,7 +334,7 @@ with dpg.window(label="-HID Testing-", show=True, id="child_box",
         dpg.add_button(label="readPos2",width=100, height=40,tag="readPos2") 
 
         dpg.add_spacer(width=17)
-        dpg.add_button(label="Process",width=100, height=40, callback=checkProcess)
+        #dpg.add_button(label="Process",width=100, height=40, callback=checkProcess)
         dpg.add_button(label="Reset",width=100, height=40)
     
 dpg.setup_dearpygui()

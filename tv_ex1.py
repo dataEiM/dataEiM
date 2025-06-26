@@ -1,20 +1,11 @@
 import dearpygui.dearpygui as dpg
 import cv2
 import datetime
-
-import difflib
-
 _program_title="GLX Input Check"
 
 _last_tempKB=set()
 _last_tempKB_DEL=set()
 _last_tempKB_ADD=set()
-
-previous_text = ""
-_small_key=list()
-_small_key_text=list()
-_set_key_fail=set()
-
 
 keyboard_layout_num_BIG=[
 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 92,
@@ -28,31 +19,8 @@ keyboard_layout = [
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.','/']    
 ]
 
- 
-#small key 1-0
-'''[49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61]
-['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=']
-'''
-#small key text
-'''
-[113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, 92, 97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47]
-['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/']
-'''
-
-#BIG KEY 1-0
-'''[49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61]
-['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=']
-'''
-#BIG KEY  TEXT
-'''[81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 92, 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 90, 88, 67, 86, 66, 78, 77, 44, 46, 47]
-['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/']
-'''
-
-def checkProcess():
-     global _set_key_fail,_last_tempKB,previous_text    
-  
-
-
+#small key 1-0 -= is [61, 56, 51, 48, 50, 55, 45, 52, 53, 54, 49, 57]
+#small key
 def chkInputlength(sender, app_data, user_data):
     pass
 
@@ -73,7 +41,6 @@ def clear_kb_bg():
         if dpg.does_item_exist("btn_"+ii):
             dpg.bind_item_theme("btn_"+ii,"empty_theme")
             print("delX=",ii,"current=",_last_tempKB)
-            set_kb_bg()
 
 def set_kb_ADD():
     global _last_tempKB_ADD
@@ -82,61 +49,13 @@ def set_kb_ADD():
         if dpg.does_item_exist("btn_"+ii):
             dpg.bind_item_theme("btn_"+ii,button_theme)
             print("addX=",ii)
-
-def click_kb_fail():
-    #set_fail_theme
-    global _set_key_fail
-    
-    for i in _set_key_fail:
-        ii=str(i)       
-        if dpg.does_item_exist("btn_"+ii):
-            dpg.bind_item_theme("btn_"+ii,"set_fail_theme")
-            print(ii) 
-
-
-
-def on_text_change(sender, app_data):
-    global _last_tempKB,_last_tempKB_DEL        
-    global previous_text
-    new_text = app_data
-
-    diff = list(difflib.ndiff(previous_text, new_text))
-    #print(diff)
-    for d in diff:
-        code = d[0]
-        char = d[2]
-        if code == '+':
-            #print(f"➕ เพิ่ม: '{char}'")
-            _last_tempKB=char.upper()
-            _small_key.append(ord(char))
-            _small_key_text.append(char)
-            set_kb_bg()
-            #print(_small_key)
-            #print(_small_key_text)
-         
-        elif code == '-':
-            #print(f"➖ ลบ: '{char}'")
-            _last_tempKB_DEL=char.upper()
-            clear_kb_bg()
-            #print(_last_tempKB_DEL)
-
-            
-    previous_text = new_text
-     
-    
-
-
-
+        
 
 #ddddddddddd
 # #input1
 #ddddddddddd
 a=()
 def check_kb():
-    global _last_tempKB
-
-
-    '''
     global a
     global _last_tempKB
     global _last_tempKB_ADD
@@ -189,32 +108,10 @@ def check_kb():
      for i in kb_txt_conv_2set:
             if ord(i) in {32, 39, 44, 46, 47, 59, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93}:
                 pass
-'''
 
-
-
-
-
+ 
 def clickKey(sender, app_data, user_data):
     print(f"setkb->sender:{sender},app_data:{app_data},user_data:{user_data}")
-    #set fail key 
-    global _set_key_fail
-    if user_data == 32:
-        num_key_=(user_data)
-    else:
-        num_key_=ord(user_data.upper())
-    print(num_key_)
-    if  num_key_ in _set_key_fail:
-        for i in _set_key_fail.copy():
-            if i == num_key_:
-                print(f"I in fail={i} move{num_key_}")
-                dpg.bind_item_theme("btn_"+str(i),"empty_theme") 
-                _set_key_fail.remove(i)
-                 
-    else:
-        _set_key_fail.add(num_key_)  
-        click_kb_fail()
-    print(_set_key_fail)
 
 #####    main  box #######
 ##########################
@@ -251,13 +148,6 @@ with dpg.theme() as button_theme:
         #dpg.add_theme_color(dpg.mvThemeCol_Border, (255, 0, 0, 255), category=dpg.mvThemeCat_Core)
 #==== endd theme
 
-with dpg.theme(tag="set_fail_theme"):
-    with dpg.theme_component(dpg.mvButton):        
-        dpg.add_theme_color(dpg.mvThemeCol_Button, (255, 20,80), category=dpg.mvThemeCat_Core)  # สีพื้นหลัง
-        dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (0, 180, 255), category=dpg.mvThemeCat_Core)  # สีเมื่อ hover
-        dpg.add_theme_color(dpg.mvThemeCol_ButtonActive, (0, 100, 200), category=dpg.mvThemeCat_Core)  # สีเมื่อกด
-        #dpg.add_theme_color(dpg.mvThemeCol_Border, (255, 0, 0, 255), category=dpg.mvThemeCat_Core)
-
 
 
 with dpg.window(label="Mainbox", width=600, height=400,tag="Mainbox"):     
@@ -291,7 +181,7 @@ with dpg.window(label="-HID Testing-", show=True, id="child_box",
         dpg.add_input_text(label="ABCDEF" ,tag="input1",width=130,height=100, callback=check_kb)
         dpg.add_text(tag="input1_text",default_value="xx")       
     #-------- end  read keyboard
-    dpg.add_input_text(label="พิมพ์หรือแก้ตรงไหนก็ได้", tag="input", callback=on_text_change, on_enter=False, multiline=True, height=50)        
+        
  
     dpg.add_spacer(height=2) 
     i=0
@@ -328,7 +218,7 @@ with dpg.window(label="-HID Testing-", show=True, id="child_box",
         dpg.add_button(label="readPos2",width=100, height=40,tag="readPos2") 
 
         dpg.add_spacer(width=17)
-        dpg.add_button(label="Process",width=100, height=40, callback=checkProcess)
+        #dpg.add_button(label="Process",width=100, height=40, callback=checkProcess)
         dpg.add_button(label="Reset",width=100, height=40)
     
 dpg.setup_dearpygui()
