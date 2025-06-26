@@ -215,7 +215,7 @@ def clickKey(sender, app_data, user_data):
             if i == num_key_:
                 print(f"I in fail={i} move{num_key_}")
                 dpg.bind_item_theme("btn_"+str(i),"empty_theme") 
-                _set_key_fail.remove(i)a
+                _set_key_fail.remove(i)
                  
     else:
         _set_key_fail.add(num_key_)  
@@ -259,7 +259,7 @@ with dpg.theme() as button_theme:
 
 with dpg.theme(tag="set_fail_theme"):
     with dpg.theme_component(dpg.mvButton):        
-        dpg.add_theme_color(dpg.mvThemeCol_Button, (100, 0, 0), category=dpg.mvThemeCat_Core)  # สีพื้นหลัง
+        dpg.add_theme_color(dpg.mvThemeCol_Button, (255, 20,80), category=dpg.mvThemeCat_Core)  # สีพื้นหลัง
         dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (0, 180, 255), category=dpg.mvThemeCat_Core)  # สีเมื่อ hover
         dpg.add_theme_color(dpg.mvThemeCol_ButtonActive, (0, 100, 200), category=dpg.mvThemeCat_Core)  # สีเมื่อกด
         #dpg.add_theme_color(dpg.mvThemeCol_Border, (255, 0, 0, 255), category=dpg.mvThemeCat_Core)
